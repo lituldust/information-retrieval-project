@@ -1,0 +1,11 @@
+pandas
+selenium
+ipykernel
+webdriver-manager
+numpy
+matplotlib
+seaborn
+nltk
+PySastrawi
+wordcloud
+scikit-learn
