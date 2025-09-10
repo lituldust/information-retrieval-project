@@ -9,11 +9,12 @@ from selenium.webdriver.chrome.service import Service as ChromeService
 service = ChromeService('../chromedriver.exe')
 driver = webdriver.Chrome(service=service)
 
-query = input("Masukkan kata kunci berita: ")
-query = query.replace(" ", "+")
+# Scraping menggunakan kata kunci (opsional)
+# query = input("Masukkan kata kunci berita: ")
+# query = query.replace(" ", "+")
 
-# Isi URL pake link website yang mau di scrape, kalo bisa yg ada parameter query nya
-url = f"" # Contoh dari kompas -> https://search.kompas.com/search?q={query}
+# Isi URL pake link website yang mau di scrape, yang ada page"nya
+url = f"" # Contoh dari kompas -> https://indeks.kompas.com/?site=news
 
 driver.get(url)
 driver.maximize_window()
