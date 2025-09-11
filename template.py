@@ -121,4 +121,5 @@ driver.quit()
 df = pd.DataFrame(all_articles_data)
 df.head()
 # %%
-df.to_csv(f"{query.replace('+', '_')}.csv", index=False)
+nama_web = '' # Isi nama webnya
+df.to_csv(f"{nama_web}.csv", index=False)
