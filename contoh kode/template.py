@@ -31,20 +31,6 @@ def scrape_contents(link):
 
     content_text = ""
     try:
-        # Ini buat misal isi artikelnya ada banyak trus ada tulisan kaya "read more" atau "show all"
-        try:
-            # Ini nanti sesuain sama elemen di htmlnya yang buat nampilin semua isi artikel, biasanya kaya tombol "show all" gitu
-            show_all = WebDriverWait(driver, 5).until(
-                EC.presence_of_element_located(()) # Taruh di dalam kurung ini nanti
-            )
-            driver.execute_script("arguments[0].scrollIntoView(true);", show_all)
-            time.sleep(1)
-            driver.execute_script("arguments[0].click();", show_all)
-            print("Clicked 'Show All News' button")
-            time.sleep(2)
-        except Exception:
-            print("No 'Show All News' button found or not clickable")
-
         # ambil isi artikel
         content_element = WebDriverWait(driver, 10).until(
             EC.presence_of_element_located(()) # Kasih elemen yang mencakup semua isi artikelnya
@@ -60,6 +46,10 @@ def scrape_contents(link):
 
 # Jalanin proses scraping
 while True:
+    if len(all_articles_data) >= max_articles:  # stop kalau sudah 100 artikel
+        print("Reached maximum article limit.")
+        break
+    
     print("Scraping page:", page)
     try:
         # Sesuain dengan elemen yang nyimpan artikel di halaman hasil pencarian
@@ -84,21 +74,20 @@ while True:
             description_element = article.find_element()
             content_element = scrape_contents(link_element.get_attribute('href'))
             
-            if len(all_articles_data) <= max_articles:
-                all_articles_data.append({
-                    "title": title_element.text,
-                    "link": link_element.get_attribute('href'),
-                    "date": date_element.text,
-                    "description": description_element.text,
-                    "content": content_element
-                })
+            all_articles_data.append({
+                "title": title_element.text,
+                "link": link_element.get_attribute('href'),
+                "date": date_element.text,
+                "description": description_element.text,
+                "content": content_element
+            })
 
-                print(f"Scraped article: {title_element.text}")
-                print(f"Link: {link_element.get_attribute('href')}")
-                print(f"Date: {date_element.text}")
-                print(f"Description: {description_element.text}")
-                print(f"Content length: {len(content_element)} characters")
-                print("-" * 80)
+            print(f"Scraped article: {title_element.text}")
+            print(f"Link: {link_element.get_attribute('href')}")
+            print(f"Date: {date_element.text}")
+            print(f"Description: {description_element.text}")
+            print(f"Content length: {len(content_element)} characters")
+            print("-" * 80)
 
         except Exception as e:
             print(f"Error extracting article details: {e}")
@@ -119,7 +108,5 @@ print(f"Total articles scraped: {len(all_articles_data)}")
 driver.quit()
 
 df = pd.DataFrame(all_articles_data)
-df.head()
-# %%
 nama_web = '' # Isi nama webnya
 df.to_csv(f"{nama_web}.csv", index=False)
