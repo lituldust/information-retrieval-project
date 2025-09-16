@@ -9,3 +9,4 @@ nltk
 PySastrawi
 wordcloud
 scikit-learn
+beautifulsoup4
