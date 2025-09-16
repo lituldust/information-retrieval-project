@@ -11,8 +11,8 @@ from selenium.webdriver.chrome.service import Service as ChromeService
 # Fungsi bikin slug dari title
 def make_slug(title):
     slug = title.lower().strip()
-    slug = ''.join(c for c in slug if c not in string.punctuation)  # buang tanda baca
-    slug = re.sub(r'\s+', '-', slug)  # spasi → dash
+    slug = ''.join(c for c in slug if c not in string.punctuation)
+    slug = re.sub(r'\s+', '-', slug)
     return slug
 
 # Fungsi buat scrape isi artikel detail
@@ -45,7 +45,6 @@ def scrape_contents(link):
     return date_text, content_text
 
 
-# Setup Selenium
 service = ChromeService('../chromedriver.exe')
 driver = webdriver.Chrome(service=service)
 
@@ -56,12 +55,11 @@ driver.maximize_window()
 all_articles_data = []
 max_articles = 100   # batas artikel yang mau diambil
 click_count = 0
-max_clicks = 15      # batas klik "Muat lebih banyak"
+max_clicks = 15 
 element = driver.find_element(By.CLASS_NAME, "latest-article__ghost")
 driver.execute_script("arguments[0].scrollIntoView();", element)
 print("Scrolled to bottom of the page.")
 
-# Klik "Muat lebih banyak" beberapa kali
 while click_count < max_clicks:
     try:
         muat_lebih_banyak = WebDriverWait(driver, 10).until(
@@ -75,7 +73,6 @@ while click_count < max_clicks:
         print("Tombol 'Muat lebih banyak' tidak ditemukan atau sudah habis:", e)
         break
 
-# Jalankan proses scraping
 try:
     WebDriverWait(driver, 30).until(
         EC.presence_of_all_elements_located((By.CLASS_NAME, 'latest-article-container'))
