@@ -10,3 +10,4 @@ PySastrawi
 wordcloud
 scikit-learn
 beautifulsoup4
+pyserini
