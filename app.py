@@ -156,21 +156,3 @@ if df is not None and searcher is not None:
                         st.warning(f"Could not retrieve article for document ID: {hit.docid}. Error: {e}")
             else:
                 st.warning("No articles found matching your keyword.")
-
-# --- Instructions for Running the App ---
-st.sidebar.title("How to Run This App")
-st.sidebar.markdown(
-    """
-    1.  **Install the required libraries:**
-        ```bash
-        pip install -r requirements.txt
-        ```
-    2.  **Ensure you have Java 11 installed**, as it is required by Pyserini.
-    3.  **Place this Python file (`app.py`) in the root directory of your project.**
-    4.  **Make sure the `artikel` and `indexing` directories are in the same root directory.**
-    5.  **Run the following command in your terminal:**
-        ```bash
-        streamlit run app.py
-        ```
-    """
-)
