@@ -12,3 +12,12 @@ scikit-learn
 beautifulsoup4
 pyserini
 streamlit
+
+hf_xet
+sentence-transformers
+transformers
+
+langchain-community
+langchain-huggingface
+
+faiss-cpu
