@@ -13,11 +13,16 @@ beautifulsoup4
 pyserini
 streamlit
 
+python-dotenv
+
 hf_xet
 sentence-transformers
 transformers
 
 langchain-community
 langchain-huggingface
+langchain
+langchain-experimental
+langchain_chroma
 
 faiss-cpu

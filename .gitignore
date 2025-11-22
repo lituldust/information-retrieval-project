@@ -1,4 +1,6 @@
 .venv
+.env
+
 chromedriver.exe
 kode.txt
 artikel/artikel_hasil_scraping.zip
