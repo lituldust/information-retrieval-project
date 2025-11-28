@@ -24,5 +24,6 @@ langchain-huggingface
 langchain
 langchain-experimental
 langchain_chroma
+langsmith
 
 faiss-cpu
